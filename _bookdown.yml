@@ -1,0 +1,7 @@
+book_filename: "Happiness_Economics_Research"
+output_dir: docs
+delete_merged_file: true
+new_session: false
+edit: https://github.com/alecng27/Happiness_Economics_Research/edit/master/%s
+view: https://github.com/alecng27/Happiness_Economics_Research/blob/master/%s
+history: https://github.com/alecng27/Happiness_Economics_Research/commits/master/%s

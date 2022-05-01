@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Results | Happiness Economics Research Project</title>
+  <meta name="description" content="3 Results | Happiness Economics Research Project" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Results | Happiness Economics Research Project" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Results | Happiness Economics Research Project" />
+  
+  
+  
+
+<meta name="author" content="Alec Nguyen, Michael Zhang, Bruno Sotelo" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data.html"/>
+<link rel="next" href="conclusion.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a></li>
+<li class="chapter" data-level="3" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>3</b> Results</a></li>
+<li class="chapter" data-level="4" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>4</b> Conclusion</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Happiness Economics Research Project</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="results" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Results</h1>
+<p>We created four models using <em>OLS</em> and <em>Fixed Effects</em> to explore variables. In the <em>Ordinary Least Squares (OLS)</em> model, the <em>Multiple Linear Regression (MLR)</em> relationship between different measurements is expressed.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+<p>The <em>OLS</em> method, however, is only useful when its limitations are removed. If the <em>OLS</em> doesn’t abide by the assumptions of linear regression, then the estimates we get would be skewed.
+The coefficient estimates used to multiply with the <code>gdpGrowth</code>, <code>LifeExp</code>, <code>PctMale</code>, <code>PopDensity</code>, and <code>Electricity</code> variables and added up are expressed in a linear equation which holds true the <strong>Linear in Parameters Assumption</strong>. Moreover, the data gathered is a random sample of 150 unique countries from 2015 to 2018, with a total of 590 observations, which should satisfy the <strong>Random Sampling Assumption</strong>. Regarding the <strong>No Perfect Collinearity Assumption</strong>, the independent variables <code>gdpGrowth</code>, <code>LifeExp</code>, <code>PctMale</code>, <code>PopDensity</code>, and <code>Electricity</code> aren’t constant nor perfectly correlated. The <strong>Zero Conditional Mean Assumption</strong> must also be held true. Given any value of the <code>gdpGrowth</code>, <code>LifeExp</code>, <code>PctMale</code>, <code>PopDensity</code>, and <code>Electricity</code> variables, the <em>expected value of error</em>, <span class="math inline">\((u)\)</span>, should be equal to 0.</p>
+<p>To further observe how much influence the unobservable factors have on <code>Happiness_score</code>, we apply <em>Fixed Effects</em>. For the <em>Country Fixed Effects</em> model, we are essentially placing the <code>country</code> as a dummy variable.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> By doing so, it allows us to look at the change within each country while holding constant unobservable factors that are time-constant in that specific country over the 4 years. The <em>Year Fixed Effects</em> model, on the other hand, places the <code>year</code> as a dummy variable.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> The model holds the unobservable factors that are the same for all countries within each year constant. The last model uses <em>Country-Year Fixed Effects</em> which places both the year and the country as dummy variables.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
+<table style="text-align:center">
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="4">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="4">
+Happiness_score
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>OLS</em>
+</td>
+<td colspan="3">
+<em>panel</em>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em></em>
+</td>
+<td colspan="3">
+<em>linear</em>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(OLS)
+</td>
+<td>
+(Country FE)
+</td>
+<td>
+(Year FE)
+</td>
+<td>
+(Country-Year FE)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+gdpGrowth
+</td>
+<td>
+-0.089
+</td>
+<td>
+-0.029
+</td>
+<td>
+-0.085
+</td>
+<td>
+-0.036
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = 0.271
+</td>
+<td>
+p = 0.385
+</td>
+<td>
+p = 0.298
+</td>
+<td>
+p = 0.273
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+lifeExp
+</td>
+<td>
+1.030<sup>***</sup>
+</td>
+<td>
+-0.333
+</td>
+<td>
+1.031<sup>***</sup>
+</td>
+<td>
+-1.614<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = 0.000
+</td>
+<td>
+p = 0.242
+</td>
+<td>
+p = 0.000
+</td>
+<td>
+p = 0.0004
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+PctMale
+</td>
+<td>
+0.291<sup>***</sup>
+</td>
+<td>
+-0.472
+</td>
+<td>
+0.291<sup>***</sup>
+</td>
+<td>
+-0.544
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = 0.002
+</td>
+<td>
+p = 0.616
+</td>
+<td>
+p = 0.002
+</td>
+<td>
+p = 0.558
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+PopDensity
+</td>
+<td>
+-0.001<sup>***</sup>
+</td>
+<td>
+0.004
+</td>
+<td>
+-0.001<sup>***</sup>
+</td>
+<td>
+-0.002
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = 0.008
+</td>
+<td>
+p = 0.641
+</td>
+<td>
+p = 0.008
+</td>
+<td>
+p = 0.791
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Electricity
+</td>
+<td>
+0.037<sup>*</sup>
+</td>
+<td>
+0.012
+</td>
+<td>
+0.037<sup>*</sup>
+</td>
+<td>
+0.025
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = 0.059
+</td>
+<td>
+p = 0.766
+</td>
+<td>
+p = 0.059
+</td>
+<td>
+p = 0.527
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+factor(Year)2016
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+0.337
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+p = 0.198
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+factor(Year)2017
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+0.810<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+p = 0.013
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+factor(Year)2018
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+1.468<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+p = 0.0003
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+-38.039<sup>***</sup>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+p = 0.000
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+597
+</td>
+<td>
+597
+</td>
+<td>
+597
+</td>
+<td>
+597
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.609
+</td>
+<td>
+0.006
+</td>
+<td>
+0.609
+</td>
+<td>
+0.041
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.605
+</td>
+<td>
+-0.346
+</td>
+<td>
+0.604
+</td>
+<td>
+-0.308
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="4" style="text-align:right">
+<em>*p&lt;0.1;**p&lt;0.05;***p&lt;0.01</em>
+</td>
+</tr>
+</table>
+<p><strong>Table 2.</strong> Results showing the coefficient estimates and the p-values of explanatory variables for the four models mentioned above.</p>
+<p>In the <em>OLS</em> model, it shows statistically significant coefficient estimates for all explanatory variables at either <code>1%</code> or <code>5%</code> level. The <code>Electricity</code> variable suggests every percentage point increase of electricity access would increase the <code>Happiness_score</code> by <code>0.037</code>. This is significant at the <code>5%</code> level (<code>p-value = 0.046</code>). This result meets with our expectation in which area with high electricity coverage tends to be happier, because people might be able to use entertainment devices such as TV and computers. However, the <code>gdpGrowth</code> coefficient shows an opposite relationship to what we expect. Every percentage point increase in <code>gdpGrowth</code> would result in a decrease of 0.162 in the <code>Happiness_score</code>. This is an indication of a negative relationship between the <code>gdpGowth</code> and people’s happiness, which doesn’t make much logical sense. This contradiction might be due to the self-evaluated surveys.</p>
+<p>The <em>Country Fixed Effects</em> model makes each country a dummy variable, ending up generates 150 different coefficient estimates, one for each country. This holds constant all factors that do not change within a country between 2015 and 2018. This is useful to look to observe how the variables affect each country individually and compare the differences between countries. For our purposes, we decided not to show all 150 country coefficients in <strong>Table 2</strong> and instead show the one that represents the average of all countries. The only statistically significant coefficient in this model is <code>lifeExp</code> because it is the only variable in which we can reject the null hypothesis due to the p-value being under <code>0.05</code>. The <code>-0.534</code> value for the coefficient indicates that each year increase in <code>lifeExp</code> would result in an average decrease of <code>0.534</code> in <code>Happiness_score</code> for any specific country. The other variables have large p-values, meaning that the results could have been due to chance and they are not statistically significant. The problem with this model is that the <span class="math inline">\(R^2\)</span> is very small at <code>0.011</code>, meaning that this model only explains <code>~1%</code> of the variation in the data. This makes this model irrelevant, so if we want actual results we should not focus on this model.</p>
+<p>While the <em>Country Fixed Effects</em> model is able to remove all the time-constant unobservables within each country, it fails to take into account any of the shared unobservable factors across all countries within each year. <em>Year Fixed Effects</em> model would allow us to do exactly that by making the year as the only dummy variable. The coefficient estimates for <code>gdpGrowth</code> in the <em>Year Fixed Effects</em> model is the second lowest out of the four models, sitting at <code>-0.158</code>. We thought this was counterintuitive because one would attribute economic growth to overall general happiness. Clearly, there are other factors at play that cause the decrease of <code>Happiness_score</code>. One of the reasons could be the fact that poorer countries tend to have a higher annual growth than richer countries, and people in poorer countries generally have worse living conditions, causing unhappiness. There could be dozens of other reasons, but now we know that <code>gdpGrowth</code> is not associated with a national feeling of life satisfaction. This result reflects our prediction in which a higher GDP growth rate might negatively affect the population’s overall happiness due to an intensive working environment.</p>
+<p>In the <em>Country and Year Fixed Effects</em> model, there are a total of 590 dummy variables created. Although there are 150 variables and 4 years, there wouldn’t be 600 variables because some countries are only accounted for 3 years instead of 4. The coefficients shown in the model are the average of all 590 coefficients. By looking at each coefficient, we notice that <code>lifeExp</code> is the only variable that has a statistically significant coefficient at <code>1%</code> level. For every year increase in <code>lifeExp</code>, we can see a decrease of <code>1.981</code> in <code>Happiness_score</code>. This suggests <code>lifeExp</code> has a negative correlation with <code>Happiness_score</code>. In our previous prediction, being able to live a longer life means happier, but in our results table, the prediction false, and there might’ve been be some other unobservables that influence the result we haven’t taken into account. Also,to note, just as the Country Fixed Effects model, the <em>Country and Year Fixed Effects</em> model has a small <span class="math inline">\(R^2\)</span> of <code>5%</code> which means only <code>5%</code> of the variation in data is explained by the model. For analytical purposes, this model should not be considered.</p>
+
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + v_{it}\)</span><a href="results.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{i=2}^{150}\sigma_idC_i + u_{it}\)</span><a href="results.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{t=2015}^{2018}\gamma_tdY_t + u_{it}\)</span><a href="results.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{i=2}^{150}\sigma_idC_i + \sum_{t=2015}^{2018}\gamma_tdY_t + u_{it}\)</span><a href="results.html#fnref11" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/alecng27/Happiness_Economics_Research/edit/master/03-Results.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": "https://github.com/alecng27/Happiness_Economics_Research/commits/master/03-Results.Rmd",
+"text": null
+},
+"view": {
+"link": "https://github.com/alecng27/Happiness_Economics_Research/blob/master/03-Results.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+# Conclusion
+
+
+The question we aimed to answer before starting our research was, **“What external influences affect happiness of people and by how much?”**. There are many reasons why we can’t give a conclusive answer with our research. Firstly, there is a large number of unobservable variables when it comes to happiness. We’re certain that the 5 variables we chose are not the only contributing factors to happiness. The answers people give to the question, **"How would you rate your happiness on a scale of 0 to 10 where 10 is the happiest?"**, are largely dependent on their specific country, culture, mentality, and perception.
+
+A clear example of subjective well-being can be seen with how people handle access to electricity. For some, electricity may not be a requirement to achieve maximum life satisfaction, but others may be content without it. The answer to the happiness question could largely depend on where the person is from.. Therefore, the answers that people in developing countries give to the happiness survey might actually be higher compared to the first-world countries and in turn, skew the results.
+
+These skewed results can be seen with the counterintuitive results that were given by the `lifeExp` variable in the *Country Fixed Effects* and *Country-Year Fixed Effects* models. The coefficients being negative for these models but not for the *OLS* or *Year Fixed Effects* models put in display the large discrepancies between an individual country’s happiness and its life expectancy. These interesting results are what made us realize how different external influences could be depending on the country. We think that after seeing results like these, a worthwhile area of research to visit is the difference in cultures around the world and how they affect one’s own judgement of happiness.
+
+A study on *Culture and Happiness* strengthens this point. According to Ye, Ng, and Lian, **“Culture may be the main factor for country fixed effects. The empirical results show that culture variables have significant effects in the regression on selective well being, suggesting that culture is an important explanatory variable for selective well being.”**^[Referenced [*NCBI*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4541708/)] These observations show how important it is to take into account important external influences such as culture, race, politics, human rights, and social class when looking into a national level of subjective well-being.
+
+
+
+

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Data | Happiness Economics Research Project</title>
+  <meta name="description" content="2 Data | Happiness Economics Research Project" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Data | Happiness Economics Research Project" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Data | Happiness Economics Research Project" />
+  
+  
+  
+
+<meta name="author" content="Alec Nguyen, Michael Zhang, Bruno Sotelo" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="results.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a></li>
+<li class="chapter" data-level="3" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>3</b> Results</a></li>
+<li class="chapter" data-level="4" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>4</b> Conclusion</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Happiness Economics Research Project</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Data</h1>
+<p>We will conduct a thorough examination on the <em>World Happiness Report</em> between the year 2015 and 2018. The reason behind choosing the years in the most recent decade is in an attempt to gather up-to-date measures. The <em>World Happiness Report</em> of a certain year calculates the <em>Happiness Index</em> based on the average of the previous three years’ surveys. For example, the <em>World Happiness Report 2015</em> is calculated from the average of the year 2012 to 2014 datasets.</p>
+<p>The happiness score is measured through self-reported surveys that ask the question, <strong>“How would you rate your happiness on a scale of 0 to 10 where 10 is the happiest?”</strong>. These surveys are representative of 80% or more of the population of a country and also account specifically for people who are 15 or older. A major limitation to this method of gathering data, however, is it can be biased at times. With different countries, there are bound to be different cultural and societal influences on the citizens’ mindsets that result in different standards in evaluating one’s happiness level. This is why it can be more scientific to refer to happiness as subjective well-being instead. Visit the <em>Gallup World Poll</em> website, the main source of information for the <em>World Happiness Report</em>, for detailed information on how the data was obtained.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p>In the reports, the <em>Happiness Index</em> can be explained by the following six key factors: <em>economy (GDP per Capita)</em>, <em>family</em>, <em>health (Life Expectancy)</em>, <em>freedom</em>, and <em>government trust</em>. However, the six factors added together are equal to the happiness score and consequently violate the <strong>No Perfect Collinearity Assumption</strong> if we attempt to run any regressions on the data. In our effort to prevent the said violation, we keep the <code>Happiness_score</code> variable from the <em>World Happiness Report (2014-2018)</em> as our response variable and extract other independent variables from the <em>World Bank Group</em>.</p>
+<p>The <em>World Bank Group</em> database provides open-source data that contains a comprehensive amount of information about many countries’ development.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> We will explore the subjective well-being of people in 150 countries across the world with the combination of the <em>World Happiness Report</em> and <em>World Bank Group</em> between 2015 and 2018.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> We merge the data across four years in order to measure the changes over time. This, in effect, also reduces random sampling errors by obtaining a larger sample size.</p>
+<p>The* World Bank Group* categorizes its data into twenty comprehensive indicators. The variables we choose to further explore are selected from the following five indicators: <em>Health</em>, <em>Gender</em>, <em>Climate Change</em>, <em>Urban Development</em>, and <em>Economy &amp; Growth</em>.</p>
+<p><code>Electricity</code>, as one of our five independent variables, is a part of the <a href="https://data.worldbank.org/topic/climate-change?view=chart"><em>Climate Change Indicator</em></a>. This variable represents the percentage of people in each country that have access to electricity. In countries with higher percentages of people having electricity, people might be able to use entertainment devices such as TV and computers, which in turn could influence their state of mind, including feeling happy.</p>
+<p><code>PopDensity</code>, categorized as a part of <a href="https://data.worldbank.org/topic/urban-development?view=chart"><em>Urban Development Indicator</em></a>, represents the density of the population of each country. It’s calculated by dividing the amount of people over the total sq. km of land area. The denser areas could lead to a lack of food supplies or medical resources, and that might decrease people’s trust in the government, which reflects back at the happiness score.</p>
+<p>The <code>gdpGrowth</code> variable, categorized into the <a href="https://data.worldbank.org/topic/economy-and-growth?view=chart"><em>Economy &amp; Growth Indicator</em></a>, contains the annual percentage growth rate of GDP from each country based on the constant 2010 U.S. dollars. The inclusion of the <code>gdpGrowth</code> variable is based on our prediction that in developing countries like <em>Vietnam</em>, a higher GDP growth rate might negatively affect the population’s overall happiness due to an intensive working environment. <em>Vietnam</em>, as a developing country, experiences a GDP growth rate of ~3% higher than the mean average during the observed time period. However, with this fact alone, we can’t jump to any conclusion without running any regression models.</p>
+<p>In the <a href="https://data.worldbank.org/topic/health?view=chart"><em>Health Indicator</em></a> of the <em>World Bank Group</em>, <code>lifeExp</code> is the nuthember of years an infant is expected to live, given that the prevailing patterns of mortality rate at the birthdate stays constant for the entirety of the infant’s life. In the previous section, we talked about the positive effects that happiness can bring to us. Being able to live a longer life is mentioned at the start as one of the positive effects from being happy. This suggests a possible relationship between an individual’s health and happiness, which we’ll apply <em>OLS</em> and <em>Fixed Effects</em> to find out later on.</p>
+<p><code>PctMale</code>, as part of the <a href="https://data.worldbank.org/topic/gender?view=chart"><em>Gender Indicator</em></a>, contains the percentage of the male population in each country. We took into account gender in our studies due to a possible reasoning that concerns gender inequality. The larger percentage of the male population could influence the inequality in wages for the opposite gender and that would eventually lead to a decrease in happiness.</p>
+<table style="text-align:center">
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Statistic
+</td>
+<td>
+N
+</td>
+<td>
+Mean
+</td>
+<td>
+St. Dev.
+</td>
+<td>
+Min
+</td>
+<td>
+Pctl(25)
+</td>
+<td>
+Median
+</td>
+<td>
+Pctl(75)
+</td>
+<td>
+Max
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Happiness_score
+</td>
+<td>
+597
+</td>
+<td>
+53.709
+</td>
+<td>
+11.401
+</td>
+<td>
+26.930
+</td>
+<td>
+44.600
+</td>
+<td>
+53.030
+</td>
+<td>
+61.920
+</td>
+<td>
+76.320
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+gdpGrowth
+</td>
+<td>
+597
+</td>
+<td>
+3.201
+</td>
+<td>
+3.643
+</td>
+<td>
+-27.995
+</td>
+<td>
+1.819
+</td>
+<td>
+3.199
+</td>
+<td>
+4.843
+</td>
+<td>
+26.681
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+lifeExp
+</td>
+<td>
+597
+</td>
+<td>
+72.481
+</td>
+<td>
+7.828
+</td>
+<td>
+50.881
+</td>
+<td>
+66.681
+</td>
+<td>
+74.353
+</td>
+<td>
+78.022
+</td>
+<td>
+84.934
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+PctMale
+</td>
+<td>
+597
+</td>
+<td>
+49.945
+</td>
+<td>
+3.298
+</td>
+<td>
+45.435
+</td>
+<td>
+49.013
+</td>
+<td>
+49.653
+</td>
+<td>
+50.174
+</td>
+<td>
+76.011
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+PopDensity
+</td>
+<td>
+597
+</td>
+<td>
+244.642
+</td>
+<td>
+875.694
+</td>
+<td>
+1.925
+</td>
+<td>
+31.038
+</td>
+<td>
+81.127
+</td>
+<td>
+145.273
+</td>
+<td>
+7,952.999
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Electricity
+</td>
+<td>
+597
+</td>
+<td>
+83.205
+</td>
+<td>
+27.069
+</td>
+<td>
+8
+</td>
+<td>
+71.6
+</td>
+<td>
+99.7
+</td>
+<td>
+100
+</td>
+<td>
+100
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</table>
+<p><strong>Table 1.</strong> Summary statistics describing the number of observations, mean value, standard deviation, minimum, maximum, median, and 25 and 75 percentile range for the explanatory variables.</p>
+<p>In <strong>Table 1</strong>, there are a total of 590 observations across 4 years (2015-2018) that contains 150 unique countries.</p>
+<p>For a better interpretation of the outcome variable, we multiply the <code>Happiness_score</code> by <code>10</code>, which converts it into a <code>0-100</code> scale. The average <code>Happiness_score</code> worldwide between that time period is <code>53.86</code> out of <code>100</code>, which is less than what we expected. We assumed a score of <code>70</code> would be more than reasonable, nonetheless, our incorrect guess simply demonstrates how subjective happiness can be.</p>
+<p><em>Switzerland</em>, <em>Iceland</em>, <em>Denmark</em>, and <em>Norway</em> were the only countries that maintained their top 5 rankings of the happiness score across all four years and <em>Finland</em> was able to maintain their top 5 ranking for three years. Among these happiest countries in the world, they all have a happiness score of 70 or above and <em>Finland</em> has the highest score of <em>76.32</em>. Out of the 150 countries that are available in our data throughout the 4 years, there are 110 countries that have a happiness of below 60.</p>
+<p>In our study, we only include the <code>gdpGrowth</code> for 2015-2018. Four years is a small-time period, which is hard to reflect any major changes unless certain special events like natural disasters impact the countries. The average increase of <code>3.217%</code> of <code>gdpGrowth</code> is within our expected range. The mean for <code>PopDensity</code> is <code>246.775</code>, which is extremely small compared to the max of <code>7,952.99</code>. This shows that there is a wide range of population density across the world and some of the countries with more concentrated populations are bringing the mean up considerably. The opposite happens with the <code>Electricity</code> variable. There are many countries that have complete access to electricity, but some countries with really low percentages bring the mean down. Some countries in the central part of Africa have values around 8 to 10%, which bring the mean down to 83.8%. In the following section, we introduce the econometric methods that help us examine the explanatory variables and how much they correlate with <code>Happiness_score</code>.</p>
+
+</div>
+<div class="footnotes">
+<hr />
+<ol start="5">
+<li id="fn5"><p>Referenced <a href="https://www.gallup.com/178667/gallup-world-poll-work.aspx"><em>Gallup World Poll</em></a><a href="data.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>Referenced <a href="https://data.worldbank.org/about"><em>World Bank Group</em></a><a href="data.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p><em>World Bank</em> contains over 190 countries. However, after combining data from <em>World Bank</em> and <em>World Happiness Report</em>, the dataset outputted 150 countries with intact information.<a href="data.html#fnref7" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/alecng27/Happiness_Economics_Research/edit/master/02-Data.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": "https://github.com/alecng27/Happiness_Economics_Research/commits/master/02-Data.Rmd",
+"text": null
+},
+"view": {
+"link": "https://github.com/alecng27/Happiness_Economics_Research/blob/master/02-Data.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

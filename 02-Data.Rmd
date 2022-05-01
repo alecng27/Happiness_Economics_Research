@@ -1,0 +1,281 @@
+# Data
+
+
+```{r include=FALSE, warning=FALSE, message=FALSE}
+library(plm) 
+library(tidycensus)
+library(tidyverse)
+library(scales)
+library(lubridate)
+library(assertive)
+library(visdat)
+library(stringdist)
+library(fuzzyjoin)
+library(reclin)
+library(sf)
+library(pander)
+library(stargazer)
+library(shiny)
+library(wbstats) # To get data from the World Bank API
+
+options(tigris_use_cache = TRUE)
+
+## turn off scientific notation
+options(scipen = 5)
+```
+
+
+```{r include=FALSE, warning=FALSE, message=FALSE}
+# World Happiness Report Data
+# https://www.kaggle.com/unsdsn/world-happiness
+
+data2015 <- read_csv("2015.csv", col_names = TRUE)
+data2016 <- read_csv("2016.csv", col_names = TRUE)
+data2017 <- read_csv("2017.csv", col_names = TRUE)
+data2018 <- read_csv("2018.csv", col_names = TRUE)
+
+```
+
+
+```{r include=FALSE, warning=FALSE, message=FALSE}
+data2015 <- data2015 %>%
+  mutate(Year = "2015") %>%
+  select(Country, Rank = `Happiness Rank`, Year, Happiness_score = `Happiness Score`) %>%
+  mutate(Happiness_score = Happiness_score*10)
+
+data2016 <- data2016 %>%
+  mutate(Year = "2016") %>%
+  select(Country, Rank = `Happiness Rank`, Year, Happiness_score = `Happiness Score`) %>%
+  mutate(Happiness_score = Happiness_score*10)
+
+data2017 <- data2017 %>%
+  mutate(Year = "2017") %>%
+  select(Country, Rank = Happiness.Rank, Year, Happiness_score = Happiness.Score) %>%
+  mutate(Happiness_score = Happiness_score*10)
+
+data2018 <- data2018 %>%
+  mutate(Year = "2018") %>%
+  select(Country = `Country or region`, Rank = `Overall rank`, Year, Happiness_score = Score) %>%
+  mutate(Happiness_score = Happiness_score*10)
+
+```
+
+
+```{r eval=FALSE, include=FALSE}
+# Checking matches between datasets
+
+# data2015 %>%
+#  anti_join(data2016, by = "Country")
+
+#data2016 %>%
+#  anti_join(data2015, by = "Country")
+
+#data2016 %>%
+#  anti_join(data2017, by = "Country")
+
+```
+
+
+```{r include=FALSE, warning=FALSE, message=FALSE}
+# Joining Data
+data_all_years <- rbind(data2015, data2016)
+data_all_years <- rbind(data_all_years, data2017)
+data_all_years <- rbind(data_all_years, data2018)
+
+# Count and check which countries in the data are recored for only 1 year
+#  data_all_years %>% count(Country) %>% filter(n < 2)
+
+## Renamed a few observations to match values between years
+data_all_years <- data_all_years %>% 
+  mutate(Country = recode(Country, "Hong Kong S.A.R., China" = "Hong Kong"), Country = recode(Country, "Northern Cyprus" = "North Cyprus"), Country = recode(Country, "North Macedonia" = "Macedonia"), Country = recode(Country, "Somaliland region" = "Somaliland Region"), Country = recode(Country, "Taiwan Province of China" = "Taiwan"), Country = recode(Country, "Trinidad & Tobago" = "Trinidad and Tobago"), Year = as.numeric(Year)) %>%
+# Filtering out countries that are recorded for only 1 year
+  filter(Country != "Djibouti", Country != "Swaziland", Country != "Oman", Country != "Puerto Rico")
+
+## get vector of TRUE and FALSE where FALSE indicates there's one or more NA
+noNAs <- complete.cases(data_all_years)
+
+## When writing this code, I first checked how many rows do have NAs, and then out of how many rows 
+# sum(noNAs)
+## out of how many rows:
+# nrow(noNAs)
+
+## keep rows without any NA
+data_all_years <- data_all_years[noNAs,]
+
+```
+
+
+```{r include=FALSE, warning=FALSE, message=FALSE}
+# Print out unique countries as a csv file
+# temp <- (unique(data_all_years$Country))
+# write.csv(temp, "country.csv")
+
+# Print out the list of countries in World Bank Data
+# countryList <- wb_countries()
+# write.csv(countryList, "countryList.csv")
+
+# After semi-manually merge 2 files above and match the country codes from World Bank to countries in data_all_years, rename the file into country_codes.csv then read the file
+country_codes <- read_csv("country_codes.csv", col_names = TRUE)
+
+#	Inner_join with coutryList from World Bank removes North Cyprus, Palestinian Territories, Somaliland Region, and Swaziland from data_all_years
+data_all_years <- data_all_years %>%
+  inner_join(country_codes, by = "Country")
+
+data_all_years <- data_all_years %>%
+  select(iso3c, iso2c, Country, everything())
+
+```
+
+
+```{r include=FALSE, warning=FALSE, message=FALSE}
+# World Bank Data
+# availableIndicators <- wb_cachelist$indicators
+
+# We'll use the following variables: 
+# NY.GDP.MKTP.KD.ZG - GDP growth (annual %)
+# SP.DYN.LE00.IN    - Life expectancy at birth, total (years)
+# SP.POP.TOTL.MA.ZS - Population, male (% of total population)
+# EN.POP.DNST       - Population density (people per sq. km of land area)
+#	EG.ELC.ACCS.ZS    - Access to electricity (% of population)
+
+# Create named vector of indicators to download
+# https://data.worldbank.org/indicator
+indicatorsToDownload <- c(
+  gdpGrowth ="NY.GDP.MKTP.KD.ZG", 
+  lifeExp = "SP.DYN.LE00.IN", 
+  PctMale = "SP.POP.TOTL.MA.ZS", 
+  PopDensity = "EN.POP.DNST",
+  Electricity = "EG.ELC.ACCS.ZS"
+)
+
+## Download data
+WB_data <- wb_data(indicatorsToDownload, 
+                      start_date = 2015, 
+                      end_date = 2018)
+
+## get vector of TRUE and FALSE where FALSE indicates there's one or more NA
+noNAs_WB <- complete.cases(WB_data)
+
+## When writing this code, I first checked how many rows do have NAs, and then out of how many rows 
+# sum(noNAs_WB)
+## out of how many rows:
+# nrow(noNAs_WB)
+
+## keep rows without any NA
+WB_data <- WB_data[noNAs_WB,]
+
+```
+
+
+```{r include=FALSE, warning=FALSE, message=FALSE}
+# Filter data_all_years and WB_data for 2015
+data_all_years_filtered2015 <- data_all_years %>%
+  filter(Year == "2015")
+WB_data_filtered2015 <- WB_data %>%
+  filter(date == "2015") %>%
+  select(-c("iso2c", "country", "date"))
+# Merge the 2 filtered datasets
+data_all_years_filtered2015 <- data_all_years_filtered2015 %>%
+  inner_join(WB_data_filtered2015, by = "iso3c")
+
+# Filter data_all_years and WB_data for 2016
+data_all_years_filtered2016 <- data_all_years %>%
+  filter(Year == "2016")
+WB_data_filtered2016 <- WB_data %>%
+  filter(date == "2016") %>%
+  select(-c("iso2c", "country", "date"))
+# Merge the 2 filtered datasets
+data_all_years_filtered2016 <- data_all_years_filtered2016 %>%
+  inner_join(WB_data_filtered2016, by = "iso3c")
+
+# Filter data_all_years and WB_data for 2017
+data_all_years_filtered2017 <- data_all_years %>%
+  filter(Year == "2017")
+WB_data_filtered2017 <- WB_data %>%
+  filter(date == "2017") %>%
+  select(-c("iso2c", "country", "date"))
+# Merge the 2 filtered datasets
+data_all_years_filtered2017 <- data_all_years_filtered2017 %>%
+  inner_join(WB_data_filtered2017, by = "iso3c")
+
+# Filter data_all_years and WB_data for 2018
+data_all_years_filtered2018 <- data_all_years %>%
+  filter(Year == "2018")
+WB_data_filtered2018 <- WB_data %>%
+  filter(date == "2018") %>%
+  select(-c("iso2c", "country", "date"))
+# Merge the 2 filtered datasets
+data_all_years_filtered2018 <- data_all_years_filtered2018 %>%
+  inner_join(WB_data_filtered2018, by = "iso3c")
+
+# rbind the 4 newly merged datasets
+data_all_years <- rbind(data_all_years_filtered2015, data_all_years_filtered2016)
+data_all_years <- rbind(data_all_years, data_all_years_filtered2017)
+data_all_years <- rbind(data_all_years, data_all_years_filtered2018)
+
+```
+
+
+```{r eval=FALSE, include=FALSE}
+# To find out how many unique countries have a happiness score of lower than 60
+# below60_score <- data_all_years %>% filter(Happiness_score < 60)
+# uniquecountriebelow60 <- unique(below60_score$Country)
+
+```
+
+
+```{r eval=FALSE, include=FALSE}
+# To find out how many unique countries have a gdpGrowth of above 20
+# above20gdp <- data_all_years %>% filter(gdpGrowth > 20)
+# uniquecountriesabove20gdp <- unique(above20gdp$Country)
+
+```
+
+
+We will conduct a thorough examination on the *World Happiness Report* between the year 2015 and 2018. The reason behind choosing the years in the most recent decade is in an attempt to gather up-to-date measures. The *World Happiness Report* of a certain year calculates the *Happiness Index* based on the average of the previous three years’ surveys. For example, the *World Happiness Report 2015* is calculated from the average of the year 2012 to 2014 datasets. 
+
+The happiness score is measured through self-reported surveys that ask the question, **"How would you rate your happiness on a scale of 0 to 10 where 10 is the happiest?"**. These surveys are representative of 80% or more of the population of a country and also account specifically for people who are 15 or older. A major limitation to this method of gathering data, however, is it can be biased at times. With different countries, there are bound to be different cultural and societal influences on the citizens’ mindsets that result in different standards in evaluating one's happiness level.  This is why it can be more scientific to refer to happiness as subjective well-being instead. Visit the *Gallup World Poll* website, the main source of information for the *World Happiness Report*, for detailed information on how the data was obtained.^[Referenced [*Gallup World Poll*](https://www.gallup.com/178667/gallup-world-poll-work.aspx)]
+
+In the reports, the *Happiness Index* can be explained by the following six key factors: *economy (GDP per Capita)*, *family*, *health (Life Expectancy)*, *freedom*, and *government trust*. However, the six factors added together are equal to the happiness score and consequently violate the **No Perfect Collinearity Assumption** if we attempt to run any regressions on the data. In our effort to prevent the said violation, we keep the `Happiness_score` variable from the *World Happiness Report (2014-2018)* as our response variable and extract other independent variables from the *World Bank Group*. 
+
+The *World Bank Group* database provides open-source data that contains a comprehensive amount of information about many countries’ development.^[Referenced [*World Bank Group*](https://data.worldbank.org/about)] We will explore the subjective well-being of people in 150 countries across the world with the combination of the *World Happiness Report* and *World Bank Group* between 2015 and 2018.^[*World Bank* contains over 190 countries. However, after combining data from *World Bank* and *World Happiness Report*, the dataset outputted 150 countries with intact information.] We merge the data across four years in order to measure the changes over time. This, in effect, also reduces random sampling errors by obtaining a larger sample size. 
+
+The* World Bank Group* categorizes its data into twenty comprehensive indicators. The variables we choose to further explore are selected from the following five indicators: *Health*, *Gender*, *Climate Change*, *Urban Development*, and *Economy & Growth*. 
+
+`Electricity`, as one of our five independent variables, is a part of the [*Climate Change Indicator*](https://data.worldbank.org/topic/climate-change?view=chart). This variable represents the percentage of people in each country that have access to electricity. In countries with higher percentages of people having electricity, people might be able to use entertainment devices such as TV and computers, which in turn could influence their state of mind, including feeling happy.
+
+`PopDensity`, categorized as a part of [*Urban Development Indicator*](https://data.worldbank.org/topic/urban-development?view=chart), represents the density of the population of each country. It’s calculated by dividing the amount of people over the total sq. km of land area. The denser areas could lead to a lack of food supplies or medical resources, and that might decrease people’s trust in the government, which reflects back at the happiness score. 
+
+The `gdpGrowth` variable, categorized into the [*Economy & Growth Indicator*](https://data.worldbank.org/topic/economy-and-growth?view=chart), contains the annual percentage growth rate of GDP from each country based on the constant 2010 U.S. dollars. The inclusion of the `gdpGrowth` variable is based on our prediction that in developing countries like *Vietnam*, a higher GDP growth rate might negatively affect the population’s overall happiness due to an intensive working environment. *Vietnam*, as a developing country, experiences  a GDP growth rate  of ~3% higher than the mean average during the observed time period. However, with this fact alone, we can’t jump to any conclusion without running any regression models.
+
+In the [*Health Indicator*](https://data.worldbank.org/topic/health?view=chart) of the *World Bank Group*, `lifeExp` is the nuthember of years an infant is expected to live, given that the prevailing patterns of mortality rate at the birthdate stays constant for the entirety of the infant’s life. In the previous section, we talked about the positive effects that happiness can bring to us. Being able to live a longer life is mentioned at the start as one of the positive effects from being happy. This suggests a possible relationship between an individual's health and happiness, which we’ll apply *OLS* and *Fixed Effects* to find out later on.
+
+`PctMale`, as part of the [*Gender Indicator*](https://data.worldbank.org/topic/gender?view=chart), contains the percentage of the male population in each country. We took into account gender in our studies due to a possible reasoning that concerns gender inequality.  The larger percentage of the male population could influence the inequality in wages for the opposite gender and that would eventually lead to a decrease in happiness.  
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
+# Summary Statistics
+
+data_all_years %>% 
+  select(Country, Happiness_score, gdpGrowth, lifeExp, PctMale, PopDensity, Electricity) %>% 
+  as.data.frame() %>%
+  stargazer(., type = "html",summary.stat = c("n","mean","sd", "min", "p25", "median", "p75", "max"))
+```
+
+**Table 1.** Summary statistics describing the number of observations, mean value, standard deviation, minimum, maximum, median, and 25 and 75 percentile range  for the explanatory variables.
+
+In **Table 1**, there are a total of 590 observations across 4 years (2015-2018) that contains 150 unique countries. 
+
+For a better interpretation of the outcome variable, we multiply the `Happiness_score` by `10`, which converts it into a `0-100` scale. The average `Happiness_score` worldwide between that time period is `53.86` out of `100`, which is less than what we expected. We assumed a score of `70` would be more than reasonable, nonetheless, our incorrect guess simply demonstrates how subjective happiness can be. 
+
+*Switzerland*, *Iceland*, *Denmark*, and *Norway* were the only countries that maintained their top 5 rankings of the happiness score across all four years and *Finland* was able to maintain their top 5 ranking for three years. Among these happiest countries in the world, they all have a happiness score of 70 or above and *Finland* has the highest score of *76.32*. Out of the 150 countries that are available in our data throughout the 4 years, there are 110 countries that have a happiness of below 60.
+
+In our study, we only include the `gdpGrowth` for 2015-2018. Four years is a small-time period, which is hard to reflect any major changes unless certain special events like natural disasters impact the countries. The average increase of `3.217%` of `gdpGrowth` is within our expected range. The mean for `PopDensity` is `246.775`, which is extremely small compared to the max of `7,952.99`. This shows that there is a wide range of population density across the world and some of the countries with more concentrated populations are bringing the mean up considerably. The opposite happens with the `Electricity` variable. There are many countries that have complete access to electricity, but some countries with really low percentages bring the mean down. Some countries in the central part of Africa have values around 8 to 10%, which bring the mean down to 83.8%. In the following section, we introduce the econometric methods that help us examine the explanatory variables and how much they correlate with `Happiness_score`. 
+
+
+
+
+
+
+
+

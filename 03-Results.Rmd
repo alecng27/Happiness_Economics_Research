@@ -1,0 +1,54 @@
+# Results
+
+
+We created four models using *OLS* and *Fixed Effects* to explore variables. In the *Ordinary Least Squares (OLS)* model, the *Multiple Linear Regression (MLR)* relationship between different measurements is expressed.^[$HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + v_{it}$] 
+
+The *OLS* method, however, is only useful when its limitations are removed. If the *OLS* doesn’t abide by the assumptions of linear regression, then the estimates we get would be skewed. 
+The coefficient estimates used to multiply with the `gdpGrowth`, `LifeExp`, `PctMale`, `PopDensity`, and `Electricity` variables and added up are expressed in a linear equation which holds true the **Linear in Parameters Assumption**. Moreover, the data gathered is a random sample of 150 unique countries from 2015 to 2018, with a total of 590 observations, which should satisfy the **Random Sampling Assumption**. Regarding the **No Perfect Collinearity Assumption**, the independent variables `gdpGrowth`, `LifeExp`, `PctMale`, `PopDensity`, and `Electricity` aren’t constant nor perfectly correlated. The **Zero Conditional Mean Assumption** must also be held true. Given any value of the `gdpGrowth`, `LifeExp`, `PctMale`, `PopDensity`, and `Electricity` variables, the *expected value of error*, $(u)$, should be equal to 0. 
+
+To further observe how much influence the unobservable factors have on `Happiness_score`, we apply *Fixed Effects*. For the *Country Fixed Effects* model, we are essentially placing the `country` as a dummy variable.^[$HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{i=2}^{150}\sigma_idC_i + u_{it}$] By doing so, it allows us to look at the change within each country while holding constant unobservable factors that are time-constant in that specific country over the 4 years. The *Year Fixed Effects* model, on the other hand, places the `year` as a dummy variable.^[$HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{t=2015}^{2018}\gamma_tdY_t + u_{it}$] The model holds the unobservable factors that are the same for all countries within each year constant. The last model uses *Country-Year Fixed Effects* which places both the year and the country as dummy variables.^[$HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{i=2}^{150}\sigma_idC_i + \sum_{t=2015}^{2018}\gamma_tdY_t + u_{it}$]
+
+```{r include=FALSE, warning=FALSE, message=FALSE}
+# Regression Results
+
+# OLS
+ols <- lm(data=data_all_years,Happiness_score~gdpGrowth+lifeExp+PctMale+PopDensity+Electricity)
+
+# Country Fixed Effects
+countryPlm <- plm(Happiness_score~gdpGrowth+lifeExp+PctMale+PopDensity+Electricity, data=data_all_years, index=c("Country"), model = "within", effect="individual")
+
+# Year Fixed Effects
+yearPlm <- plm(Happiness_score~gdpGrowth+lifeExp+PctMale+PopDensity+Electricity,data=data_all_years, index=c("Year"), model = "within", effect="individual")
+
+# Country Fixed Effects w/ factor(year) = Country and  Year Fixed Effects
+countryPlm_factor_year <- plm(Happiness_score~gdpGrowth+lifeExp+PctMale+PopDensity+Electricity+factor(Year),data=data_all_years, index=c("Country"), model = "within", effect="individual")
+
+# Country and  Year Fixed Effects
+# country_year_Plm <- plm(Happiness_score~gdpGrowth+lifeExp+PctMale+PopDensity+Electricity,data=data_all_years, index=c("Country","Year"), model = "within", effect="twoways")
+
+```
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
+stargazer(ols, countryPlm, yearPlm, countryPlm_factor_year, 
+          type = "html", 
+          report=('vc*p'),
+          keep.stat = c("n","rsq","adj.rsq"), 
+          notes = "<em>&#42;p&lt;0.1;&#42;&#42;p&lt;0.05;&#42;&#42;&#42;p&lt;0.01</em>", 
+          notes.append = FALSE, 
+          model.numbers = FALSE, 
+          column.labels = c("(OLS)","(Country FE)", "(Year FE)", "(Country-Year FE)"))
+```
+
+**Table 2.** Results showing the coefficient estimates and the p-values of explanatory variables for the four models mentioned above. 
+
+In the *OLS* model, it shows statistically significant coefficient estimates for all explanatory variables at either `1%` or `5%` level. The `Electricity` variable suggests every percentage point increase of electricity access would increase the `Happiness_score` by `0.037`. This is significant at the `5%` level (`p-value = 0.046`). This result meets with our expectation in which area with high electricity coverage tends to be happier, because people might be able to use entertainment devices such as TV and computers. However, the `gdpGrowth` coefficient shows an opposite relationship to what we expect. Every percentage point increase in `gdpGrowth` would result in a decrease of 0.162 in the `Happiness_score`. This is an indication of a negative relationship between the `gdpGowth` and people’s happiness, which doesn’t make much logical sense. This contradiction might be due to the self-evaluated surveys.
+
+The *Country Fixed Effects* model makes each country a dummy variable, ending up generates 150 different coefficient estimates, one for each country. This holds constant all factors that do not change within a country between 2015 and 2018. This is useful to look to observe how the variables affect each country individually and compare the differences between countries. For our purposes, we decided not to show all 150 country coefficients in **Table 2** and instead show the one that represents the average of all countries. The only statistically significant coefficient in this model is `lifeExp` because it is the only variable in which we can reject the null hypothesis due to the p-value being under `0.05`. The `-0.534` value for the coefficient indicates that each year increase in `lifeExp` would result in an average decrease of `0.534` in `Happiness_score` for any specific country. The other variables have large p-values, meaning that the results could have been due to chance and they are not statistically significant. The problem with this model is that the $R^2$ is very small at `0.011`, meaning that this model only explains `~1%` of the variation in the data. This makes this model irrelevant, so if we want actual results we should not focus on this model.
+
+While the *Country Fixed Effects* model is able to remove all the time-constant unobservables within each country, it fails to take into account any of the shared unobservable factors across all countries within each year. *Year Fixed Effects* model would allow us to do exactly that by making the year as the only dummy variable. The coefficient estimates for `gdpGrowth` in the *Year Fixed Effects* model is the second lowest out of the four models, sitting at `-0.158`. We thought this was counterintuitive because one would attribute economic growth to overall general happiness. Clearly, there are other factors at play that cause the decrease of `Happiness_score`. One of the reasons could be the fact that poorer countries tend to have a higher annual growth than richer countries, and people in poorer countries generally have worse living conditions, causing unhappiness. There could be dozens of other reasons, but now we know that `gdpGrowth` is not associated with a national feeling of life satisfaction. This result reflects our prediction in which a higher GDP growth rate might negatively affect the population’s overall happiness due to an intensive working environment.
+
+In the *Country and Year Fixed Effects* model, there are a total of 590 dummy variables created. Although there are 150 variables and 4 years, there wouldn’t be 600 variables because some countries are only accounted for 3 years instead of 4. The coefficients shown in the model are the average of all 590 coefficients. By looking at each coefficient, we notice that `lifeExp` is the only variable that has a statistically significant coefficient at `1%` level. For every year increase in `lifeExp`, we can see a decrease of `1.981` in `Happiness_score`. This suggests `lifeExp` has a negative correlation with `Happiness_score`. In our previous prediction, being able to live a longer life means happier, but in our results table, the prediction false, and there might've been be some other unobservables that influence the result we haven’t taken into account. Also,to note, just as the Country Fixed Effects model, the *Country and Year Fixed Effects* model has a small $R^2$ of `5%` which means only `5%` of the variation in data is explained by the model. For analytical purposes, this model should not be considered.
+
+
+

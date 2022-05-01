@@ -1,0 +1,31 @@
+--- 
+title: "Happiness Economics Research Project"
+author: "Alec Nguyen, Michael Zhang, Bruno Sotelo"
+site: bookdown::bookdown_site
+bibliography: references.bib
+biblio-style: apalike
+link-citations: yes
+---
+
+
+# About {-}
+
+The question this research aim to answer is, “What external influences affect happiness and by how much?” Although we can’t give a concrete answer on the pursuit of happiness, we can take a step towards the right direction using statistics.
+
+This research project is conducted using R along with Econometrics models to study the influence of different variables such as Life Expectancy, Percentage of population with access to Electricity, Population density, etc. has on the happiness of people around the world. 
+
+https://alecng27.github.io/Happiness_Economics_Research/
+
+**Contact**
+
+Alec Nguyen
+
+Economics, Lawrence University
+
+alec.nguyen27@gmail.com
+
+[LinkedIn](https://www.linkedin.com/in/alec-nguyen-about/)
+
+[Portfolio](https://alecng27.github.io/Portfolio/)
+
+
