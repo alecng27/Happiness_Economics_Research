@@ -12,7 +12,7 @@ link-citations: yes
 
 Project Source Code - https://github.com/alecng27/Happiness_Economics_Research
 
-See the [LICENSE](LICENSE) file for license rights and limitations.
+See the [LICENSE](https://github.com/alecng27/Happiness_Economics_Research/blob/main/LICENSE) file for license rights and limitations.
 
 The question this research aim to answer is, “What external influences affect happiness and by how much?” Although we can’t give a concrete answer on the pursuit of happiness, we can take a step towards the right direction using statistics.
 
