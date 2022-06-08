@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Results | Happiness Economics Research Project</title>
   <meta name="description" content="3 Results | Happiness Economics Research Project" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Results | Happiness Economics Research Project" />
   <meta property="og:type" content="book" />
-  
   
   
   
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="data.html"/>
 <link rel="next" href="conclusion.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 
@@ -91,12 +90,12 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="results" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Results</h1>
-<p>We created four models using <em>OLS</em> and <em>Fixed Effects</em> to explore variables. In the <em>Ordinary Least Squares (OLS)</em> model, the <em>Multiple Linear Regression (MLR)</em> relationship between different measurements is expressed.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+<div id="results" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Results<a href="results.html#results" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>We created four models using <em>OLS</em> and <em>Fixed Effects</em> to explore variables. In the <em>Ordinary Least Squares (OLS)</em> model, the <em>Multiple Linear Regression (MLR)</em> relationship between different measurements is expressed.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
 <p>The <em>OLS</em> method, however, is only useful when its limitations are removed. If the <em>OLS</em> doesn’t abide by the assumptions of linear regression, then the estimates we get would be skewed.
 The coefficient estimates used to multiply with the <code>gdpGrowth</code>, <code>LifeExp</code>, <code>PctMale</code>, <code>PopDensity</code>, and <code>Electricity</code> variables and added up are expressed in a linear equation which holds true the <strong>Linear in Parameters Assumption</strong>. Moreover, the data gathered is a random sample of 150 unique countries from 2015 to 2018, with a total of 590 observations, which should satisfy the <strong>Random Sampling Assumption</strong>. Regarding the <strong>No Perfect Collinearity Assumption</strong>, the independent variables <code>gdpGrowth</code>, <code>LifeExp</code>, <code>PctMale</code>, <code>PopDensity</code>, and <code>Electricity</code> aren’t constant nor perfectly correlated. The <strong>Zero Conditional Mean Assumption</strong> must also be held true. Given any value of the <code>gdpGrowth</code>, <code>LifeExp</code>, <code>PctMale</code>, <code>PopDensity</code>, and <code>Electricity</code> variables, the <em>expected value of error</em>, <span class="math inline">\((u)\)</span>, should be equal to 0.</p>
-<p>To further observe how much influence the unobservable factors have on <code>Happiness_score</code>, we apply <em>Fixed Effects</em>. For the <em>Country Fixed Effects</em> model, we are essentially placing the <code>country</code> as a dummy variable.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> By doing so, it allows us to look at the change within each country while holding constant unobservable factors that are time-constant in that specific country over the 4 years. The <em>Year Fixed Effects</em> model, on the other hand, places the <code>year</code> as a dummy variable.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> The model holds the unobservable factors that are the same for all countries within each year constant. The last model uses <em>Country-Year Fixed Effects</em> which places both the year and the country as dummy variables.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
+<p>To further observe how much influence the unobservable factors have on <code>Happiness_score</code>, we apply <em>Fixed Effects</em>. For the <em>Country Fixed Effects</em> model, we are essentially placing the <code>country</code> as a dummy variable.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> By doing so, it allows us to look at the change within each country while holding constant unobservable factors that are time-constant in that specific country over the 4 years. The <em>Year Fixed Effects</em> model, on the other hand, places the <code>year</code> as a dummy variable.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> The model holds the unobservable factors that are the same for all countries within each year constant. The last model uses <em>Country-Year Fixed Effects</em> which places both the year and the country as dummy variables.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
 <table style="text-align:center">
 <tr>
 <td colspan="5" style="border-bottom: 1px solid black">
@@ -620,11 +619,11 @@ Adjusted R<sup>2</sup>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="8">
-<li id="fn8"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + v_{it}\)</span><a href="results.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{i=2}^{150}\sigma_idC_i + u_{it}\)</span><a href="results.html#fnref9" class="footnote-back">↩︎</a></p></li>
-<li id="fn10"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{t=2015}^{2018}\gamma_tdY_t + u_{it}\)</span><a href="results.html#fnref10" class="footnote-back">↩︎</a></p></li>
-<li id="fn11"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{i=2}^{150}\sigma_idC_i + \sum_{t=2015}^{2018}\gamma_tdY_t + u_{it}\)</span><a href="results.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<ol start="9">
+<li id="fn9"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + v_{it}\)</span><a href="results.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{i=2}^{150}\sigma_idC_i + u_{it}\)</span><a href="results.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{t=2015}^{2018}\gamma_tdY_t + u_{it}\)</span><a href="results.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p><span class="math inline">\(HappinessScore_{it} = \beta_0+\beta_1 gdpGrowth_{it} + \beta_2 lifeExp_{it} + \beta_3 PctMale_{it} + \beta_4 PopDensity_{it} + \beta_5 Electricity_{it} + \sum_{i=2}^{150}\sigma_idC_i + \sum_{t=2015}^{2018}\gamma_tdY_t + u_{it}\)</span><a href="results.html#fnref12" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

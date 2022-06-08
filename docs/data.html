@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Data | Happiness Economics Research Project</title>
   <meta name="description" content="2 Data | Happiness Economics Research Project" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Data | Happiness Economics Research Project" />
   <meta property="og:type" content="book" />
-  
   
   
   
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="introduction.html"/>
 <link rel="next" href="results.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 
@@ -91,12 +90,12 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Data</h1>
+<div id="data" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>We will conduct a thorough examination on the <em>World Happiness Report</em> between the year 2015 and 2018. The reason behind choosing the years in the most recent decade is in an attempt to gather up-to-date measures. The <em>World Happiness Report</em> of a certain year calculates the <em>Happiness Index</em> based on the average of the previous three years’ surveys. For example, the <em>World Happiness Report 2015</em> is calculated from the average of the year 2012 to 2014 datasets.</p>
-<p>The happiness score is measured through self-reported surveys that ask the question, <strong>“How would you rate your happiness on a scale of 0 to 10 where 10 is the happiest?”</strong>. These surveys are representative of 80% or more of the population of a country and also account specifically for people who are 15 or older. A major limitation to this method of gathering data, however, is it can be biased at times. With different countries, there are bound to be different cultural and societal influences on the citizens’ mindsets that result in different standards in evaluating one’s happiness level. This is why it can be more scientific to refer to happiness as subjective well-being instead. Visit the <em>Gallup World Poll</em> website, the main source of information for the <em>World Happiness Report</em>, for detailed information on how the data was obtained.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p>The happiness score is measured through self-reported surveys that ask the question, <strong>“How would you rate your happiness on a scale of 0 to 10 where 10 is the happiest?”</strong>. These surveys are representative of 80% or more of the population of a country and also account specifically for people who are 15 or older. A major limitation to this method of gathering data, however, is it can be biased at times. With different countries, there are bound to be different cultural and societal influences on the citizens’ mindsets that result in different standards in evaluating one’s happiness level. This is why it can be more scientific to refer to happiness as subjective well-being instead. Visit the <em>Gallup World Poll</em> website, the main source of information for the <em>World Happiness Report</em>, for detailed information on how the data was obtained.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
 <p>In the reports, the <em>Happiness Index</em> can be explained by the following six key factors: <em>economy (GDP per Capita)</em>, <em>family</em>, <em>health (Life Expectancy)</em>, <em>freedom</em>, and <em>government trust</em>. However, the six factors added together are equal to the happiness score and consequently violate the <strong>No Perfect Collinearity Assumption</strong> if we attempt to run any regressions on the data. In our effort to prevent the said violation, we keep the <code>Happiness_score</code> variable from the <em>World Happiness Report (2014-2018)</em> as our response variable and extract other independent variables from the <em>World Bank Group</em>.</p>
-<p>The <em>World Bank Group</em> database provides open-source data that contains a comprehensive amount of information about many countries’ development.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> We will explore the subjective well-being of people in 150 countries across the world with the combination of the <em>World Happiness Report</em> and <em>World Bank Group</em> between 2015 and 2018.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> We merge the data across four years in order to measure the changes over time. This, in effect, also reduces random sampling errors by obtaining a larger sample size.</p>
+<p>The <em>World Bank Group</em> database provides open-source data that contains a comprehensive amount of information about many countries’ development.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> We will explore the subjective well-being of people in 150 countries across the world with the combination of the <em>World Happiness Report</em> and <em>World Bank Group</em> between 2015 and 2018.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> We merge the data across four years in order to measure the changes over time. This, in effect, also reduces random sampling errors by obtaining a larger sample size.</p>
 <p>The* World Bank Group* categorizes its data into twenty comprehensive indicators. The variables we choose to further explore are selected from the following five indicators: <em>Health</em>, <em>Gender</em>, <em>Climate Change</em>, <em>Urban Development</em>, and <em>Economy &amp; Growth</em>.</p>
 <p><code>Electricity</code>, as one of our five independent variables, is a part of the <a href="https://data.worldbank.org/topic/climate-change?view=chart"><em>Climate Change Indicator</em></a>. This variable represents the percentage of people in each country that have access to electricity. In countries with higher percentages of people having electricity, people might be able to use entertainment devices such as TV and computers, which in turn could influence their state of mind, including feeling happy.</p>
 <p><code>PopDensity</code>, categorized as a part of <a href="https://data.worldbank.org/topic/urban-development?view=chart"><em>Urban Development Indicator</em></a>, represents the density of the population of each country. It’s calculated by dividing the amount of people over the total sq. km of land area. The denser areas could lead to a lack of food supplies or medical resources, and that might decrease people’s trust in the government, which reflects back at the happiness score.</p>
@@ -300,19 +299,19 @@ Electricity
 27.069
 </td>
 <td>
-8
+7.700
 </td>
 <td>
-71.6
+71.550
 </td>
 <td>
-99.7
+99.700
 </td>
 <td>
-100
+100.000
 </td>
 <td>
-100
+100.000
 </td>
 </tr>
 <tr>
@@ -329,10 +328,10 @@ Electricity
 </div>
 <div class="footnotes">
 <hr />
-<ol start="5">
-<li id="fn5"><p>Referenced <a href="https://www.gallup.com/178667/gallup-world-poll-work.aspx"><em>Gallup World Poll</em></a><a href="data.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>Referenced <a href="https://data.worldbank.org/about"><em>World Bank Group</em></a><a href="data.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p><em>World Bank</em> contains over 190 countries. However, after combining data from <em>World Bank</em> and <em>World Happiness Report</em>, the dataset outputted 150 countries with intact information.<a href="data.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<ol start="6">
+<li id="fn6"><p>Referenced <a href="https://www.gallup.com/178667/gallup-world-poll-work.aspx"><em>Gallup World Poll</em></a><a href="data.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Referenced <a href="https://data.worldbank.org/about"><em>World Bank Group</em></a><a href="data.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p><em>World Bank</em> contains over 190 countries. However, after combining data from <em>World Bank</em> and <em>World Happiness Report</em>, the dataset outputted 150 countries with intact information.<a href="data.html#fnref8" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

@@ -11,3 +11,4 @@ https://alecng27.github.io/Happiness_Economics_Research/
 
 See the [LICENSE](LICENSE) file for license rights and limitations.
 
+![](happy.jpg)
